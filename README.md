@@ -1,4 +1,5 @@
 # LeetCode DSA Solutions – Java 🚀
+![LeetCode Stats](https://leetcard.jacoblin.cool/jahnavi004?theme=light&font=Baloo)
 
 This repository is automatically synced with my **LeetCode** submissions using **LeetSync**.
 
