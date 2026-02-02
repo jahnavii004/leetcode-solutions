@@ -10,10 +10,11 @@ class Solution {
                 s1.push(ch);
             }
         }
-        String st1="",st2="";
+        StringBuilder st1=new StringBuilder();StringBuilder st2=new StringBuilder();
         while(!s1.isEmpty()){
-            st1+=s1.pop();
+            st1.append(s1.pop());
         }
+        s1.clear();
          for(int i=0;i<t.length();i++){
             char ch=t.charAt(i);
             if(ch == '#' && (!s1.isEmpty())){
@@ -24,11 +25,8 @@ class Solution {
             }
         }
         while(!s1.isEmpty()){
-            st2+=s1.pop();
+            st2.append(s1.pop());
         }
-        if(st1.equals(st2)){
-            return true;
-        }
-        return false;
+       return st1.toString().equals(st2.toString());
     }
 }
