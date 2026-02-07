@@ -15,29 +15,18 @@
  */
 class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
-        if(root == null || (root.left == null && root.right == null)){
+       if(root == null){
+        return 0;
+       }
+       return dfs(root,false);
+    }
+    public int dfs(TreeNode root,boolean isLeft){
+        if(root == null){
             return 0;
         }
-        List<TreeNode> lst=new ArrayList<>();
-        sum_left(root,lst);
-        int sum=0;
-        for(int i=0;i<lst.size();i++){
-            TreeNode n=lst.get(i);
-            if(n.left == null && n.right == null){
-                sum+=n.val;
-            }
+        if(root.left == null && root.right == null){
+            return isLeft ? root.val : 0;
         }
-        return sum;
-
-    }
-    public void sum_left(TreeNode root,List<TreeNode> lst){
-        if(root ==null){
-            return;
-        }
-        if(root.left!=null){
-            lst.add(root.left);
-        }
-        sum_left(root.left,lst);
-        sum_left(root.right,lst);
+        return dfs(root.left,true) + dfs(root.right , false);
     }
 }
