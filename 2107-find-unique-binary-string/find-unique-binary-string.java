@@ -10,6 +10,7 @@ class Solution {
         return soln;
     }
     public void find(String []nums,HashSet<String> set,String ans,int n ){
+        if (!soln.equals("")) return;  // stop if already found
         if(ans.length() == n){
             if(!set.contains(ans)){
                 soln = ans;
