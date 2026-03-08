@@ -1,24 +1,14 @@
 class Solution {
-    String soln="";
     public String findDifferentBinaryString(String[] nums) {
-        int n=nums.length;
-        HashSet<String> set=new HashSet<>();
-        for(int i=0;i<n;i++){
-            set.add(nums[i]);
-        }
-        find(nums,set,"",n);
-        return soln;
-    }
-    public void find(String []nums,HashSet<String> set,String ans,int n ){
-        if (!soln.equals("")) return;  // stop if already found
-        if(ans.length() == n){
-            if(!set.contains(ans)){
-                soln = ans;
-                return;
+        StringBuilder ans=new StringBuilder();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i].charAt(i)=='1'){
+                ans.append('0');
             }
-            return;
+            else{
+                ans.append('1');
+            }
         }
-        find(nums,set,ans+"1",n);
-        find(nums,set,ans+"0",n);
+        return ans.toString();
     }
 }
