@@ -1,14 +1,12 @@
 class Solution {
     public boolean isPowerOfTwo(int n) {
-        return Power(n,0);
-    }
-    public boolean Power(int n , int i){
-        if(Math.pow(2,i)> n){
+        if(n<=0){
             return false;
         }
-        if(Math.pow(2,i)==n){
-            return true;
+        int m=n-1;
+        if((m&n) == 0){
+           return true; 
         }
-        return Power(n,i+1);
+        return false;
     }
 }
