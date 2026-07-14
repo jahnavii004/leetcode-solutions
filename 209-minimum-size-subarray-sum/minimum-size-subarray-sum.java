@@ -5,13 +5,13 @@ class Solution {
         while(j<nums.length){
             //grow
             sum += nums[j];
-            j++;
             //shrink
             while(i<=j && sum >= target){
-                ans = j-i;
+                ans = j-i+1;
                 sum -= nums[i];
                 i++;
             }
+            j++;
             min=Math.min(min,ans);
         }
         return min == Integer.MAX_VALUE ? 0 : min;
