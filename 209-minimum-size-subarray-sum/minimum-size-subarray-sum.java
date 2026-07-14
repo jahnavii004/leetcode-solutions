@@ -7,15 +7,10 @@ class Solution {
             sum += nums[j];
             j++;
             //shrink
-            if(sum >= target){
+            while(i<=j && sum >= target){
                 ans = j-i;
-            }
-            while(i<=j && sum > target){
                 sum -= nums[i];
                 i++;
-                if(sum >= target){
-                ans = j-i;
-                }
             }
             min=Math.min(min,ans);
         }
