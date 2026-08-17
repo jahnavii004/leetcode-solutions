@@ -3,8 +3,7 @@ class Solution {
         if(n<=0){
             return false;
         }
-        int m=n-1;
-        if((m&n) == 0){
+        if((n & (n-1)) == 0){
            return true; 
         }
         return false;
