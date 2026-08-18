@@ -7,8 +7,8 @@ class Solution {
         //     ans= ans &(ans-1);
         // }
         while(ans >0){
-            cnt+= (ans)&1;
-            ans =ans>>1;
+            cnt+= ans %2;
+            ans /=2;
         }
         return  cnt;
     }
