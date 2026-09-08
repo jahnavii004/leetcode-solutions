@@ -24,20 +24,29 @@ class Solution {
             return null;
         }
         HashMap<Node, Node> map=new HashMap<>();
-        return clone(node, map);
+        return bfs(node, map);
     }
-    public Node clone(Node node, HashMap<Node, Node> map){
-        Node copy = new Node(node.val);
-        map.put(node, copy);
-        for(Node nbr : node.neighbors){
+    public Node bfs(Node node, HashMap<Node, Node> map){
+       Node copy=new Node(node.val);
+       Queue<Node> q=new ArrayDeque<>();
+       q.offer(node);
+       map.put(node,copy);
+
+       while(!q.isEmpty()){
+        Node n=q.poll();
+        Node cp = map.get(n);
+        for(Node nbr:n.neighbors){
             if(!map.containsKey(nbr)){
-                Node neighborCopy= clone(nbr, map);
-                copy.neighbors.add(neighborCopy);
+                Node nbr_copy= new Node(nbr.val);
+                cp.neighbors.add(nbr_copy);
+                map.put(nbr, nbr_copy);
+                q.offer(nbr);
             }
             else{
-                copy.neighbors.add(map.get(nbr));
+                cp.neighbors.add(map.get(nbr));
             }
         }
-        return copy;
+       }
+       return copy;
     }
 }
