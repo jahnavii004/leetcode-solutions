@@ -24,11 +24,11 @@ class Solution {
     }
 
     public void dfs(List<List<Integer>> adj, int s, boolean[]visited){
-        if(!visited[s]){
-            visited[s]=true;
-            for(int nbr: adj.get(s)){
+        visited[s]=true;
+        for(int nbr: adj.get(s)){
+            if(!visited[nbr]){
                 dfs(adj,nbr,visited);
-            }
+            }    
         }
     }
 }
