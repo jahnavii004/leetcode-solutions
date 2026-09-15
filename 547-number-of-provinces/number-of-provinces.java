@@ -3,6 +3,7 @@ class Solution {
         int n=isConnected.length; int provinces =0;
         List<List<Integer>> adj=new ArrayList<>();
         boolean[]visited=new boolean[n];
+
         for(int i=0;i<n;i++){
             adj.add(new ArrayList<>());
         }
@@ -14,21 +15,26 @@ class Solution {
             }
         }
 
-        for(int i=0;i<adj.size();i++){
+        for(int i=0;i<n;i++){
             if(!visited[i]){
-                dfs(adj,i,visited);
                 provinces++;
+                bfs(adj,i,visited);
             }
         }
-        return provinces;    
+        return provinces;
     }
 
-    public void dfs(List<List<Integer>> adj, int s, boolean[]visited){
-        visited[s]=true;
-        for(int nbr: adj.get(s)){
-            if(!visited[nbr]){
-                dfs(adj,nbr,visited);
-            }    
+    public void bfs( List<List<Integer>> adj, int s, boolean[]visited){
+        Queue<Integer> q=new ArrayDeque<>();
+        q.offer(s);
+        while(!q.isEmpty()){
+            int n = q.poll();
+            for(int nbr: adj.get(n)){
+                if(!visited[nbr]){
+                    visited[nbr] = true;
+                    q.offer(nbr);
+                }
+            }
         }
     }
 }
