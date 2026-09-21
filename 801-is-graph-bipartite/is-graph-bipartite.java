@@ -22,16 +22,16 @@ class Solution {
         return true;
     }
     public boolean dfs(List<List<Integer>> adj, int[]color,int s,int currentcolor){
-        if(color[s] == -1){
-            color[s]= currentcolor;
-           for(int nbr: adj.get(s)){
-            if(!dfs(adj,color,nbr,1-color[s])){
+        color[s]=currentcolor;
+        for(int nbr:adj.get(s)){
+            if(color[nbr] == -1){
+                if(!dfs(adj,color,nbr,1-currentcolor)){
+                    return false;
+                }
+            }
+            else if(color[s] == color[nbr]){
                 return false;
             }
-           }
-        }
-        else if(color[s] != currentcolor){
-            return false;
         }
         return true;
     }
