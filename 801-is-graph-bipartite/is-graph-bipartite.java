@@ -14,7 +14,7 @@ class Solution {
         }
         for(int i=0;i<n;i++){
             if(color[i] == -1){
-                if(!dfs(adj,color,i,0)){
+                if(!bfs(adj,color,i,0)){
                     return false;
                 }
             }
@@ -31,6 +31,26 @@ class Solution {
             }
             else if(color[s] == color[nbr]){
                 return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean bfs(List<List<Integer>> adj, int[]color,int s,int currentcolor){
+        Queue<Integer> q=new ArrayDeque<>();
+        q.offer(s);
+        color[s]= currentcolor;
+        while(!q.isEmpty()){
+            int node=q.poll();
+            currentcolor=color[node];
+            for(int nbr:adj.get(node)){
+                if(color[nbr] == -1){
+                    color[nbr] = 1-color[node];
+                    q.offer(nbr);
+                }
+                else if(color[nbr] == color[node]){
+                    return false;
+                }
             }
         }
         return true;
