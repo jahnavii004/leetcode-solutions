@@ -12,18 +12,25 @@ class Solution {
             adj.get(y).add(x);
         }
 
-        return dfs(adj, source, destination, visited);
+        return bfs(adj, source, destination, visited);
     }
-    public boolean dfs(List<List<Integer>> adj, int s, int d, boolean[]visited){
+    public boolean bfs(List<List<Integer>> adj, int s, int d, boolean[]visited){
         if(s==d){
             return true;
         }
-        if(!visited[s]){
-            visited[s] = true;
-            for(int nbr: adj.get(s)){
-                if(dfs(adj, nbr, d, visited) == true){
-                return true;
-            }
+        Queue<Integer> q=new ArrayDeque<>();
+        q.offer(s);
+        visited[s]=true;
+        while(!q.isEmpty()){
+            int n=q.poll();
+            for(int nbr:adj.get(n)){
+                if(nbr == d){
+                    return true;
+                }
+                if(!visited[nbr]){
+                    visited[nbr]=true;
+                    q.offer(nbr);
+                }
             }
         }
         return false;
