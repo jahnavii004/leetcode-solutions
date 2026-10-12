@@ -1,38 +1,53 @@
 class Solution {
-    boolean flag;
-    int cnt;
-    public void dfs(int[][]grid, int n, int m, int r, int c){
-        if(r>=n || r<0 || c>=m || c<0 || grid[r][c] == 0){
-            return;
+    class Pair{
+        int row;
+        int col;
+        Pair(int r, int c){
+            this.row=r;
+            this.col=c;
         }
-        if(r == n-1 || r== 0 || c== m-1 || c== 0){
-            if(grid[r][c] == 1){
-                flag= true;
-            }
-        }
-        cnt++;
-        grid[r][c]=0;
-        dfs(grid,n,m, r-1,c);
-        dfs(grid,n,m, r+1,c);
-        dfs(grid,n,m, r,c-1);
-        dfs(grid,n,m, r,c+1);
     }
     public int numEnclaves(int[][] grid) {
-        int n=grid.length;
-        int m=grid[0].length;
-        int ans=0;
+        Queue<Pair> q=new ArrayDeque<>();
+        int n=grid.length; int m=grid[0].length;
+        boolean[][]visited= new boolean[n][m];
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(grid[i][j] == 1){
-                    flag=false;
-                    cnt=0;
-                    dfs(grid,n,m,i,j);
-                    if(!flag){
-                        ans += cnt;
+                if(i == 0 || i == n-1 || j==0 || j == m-1){
+                    if(grid[i][j] == 1){
+                        q.offer(new Pair(i,j));
+                        visited[i][j]=true;
                     }
                 }
             }
         }
-        return ans;
+
+        while(!q.isEmpty()){
+            Pair node= q.poll();
+            int ri= node.row;
+            int ci = node.col;
+           int[][]dir = {{-1,0},{1,0},{0,-1},{0,1}};
+
+           for(int[]d : dir){
+            int row = ri+d[0];
+            int col = ci+d[1];
+
+            if(row>=0 && row<n && col >=0 && col<m && grid[row][col] == 1 && !visited[row][col]){
+                q.offer(new Pair(row,col));
+                visited[row][col] = true;
+            } 
+           }
+
+        }
+
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j] == 1 && !visited[i][j]){
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
     }
 }
