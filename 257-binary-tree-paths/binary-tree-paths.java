@@ -27,7 +27,7 @@ class Solution {
         sb= sb+ root.val +"->";
         paths(root.left,sb,lst);
         paths(root.right,sb,lst);
-        sb = sb.substring(0,sb.length()-1);
+        // sb = sb.substring(0,sb.length()-1);
     }
     public List<String> binaryTreePaths(TreeNode root) {
         String sb="";
